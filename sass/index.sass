@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700')
+
+=itemBackground($img)
+  width: 100%
+  height: 100%
+  background: url($img)
+  background-repeat: no-repeat
+  background-size: cover
+  background-position: center center
+
+=item_Text($fontColor,$fontWeight,$textAlign)
+  width: 100%
+  color: $fontColor
+  font-weight: $fontWeight
+  text-align: $textAlign
+
+=transform-translate($valX,$valY)
+  -webkit-transform: translate($valX,$valY)
+  -moz-transform: translate($valX,$valY)
+  -ms-transform: translate($valX,$valY)
+  -o-transform: translate($valX,$valY)
+  transform: translate($valX,$valY)
+
+=slideIn_Left($opacity,$pos)
+  opacity: $opacity
+  left: $pos
+
+=animation()
+  -webkit-animation: in 1.2s cubic-bezier(.01,1.34,.77,1.56) forwards
+  -o-animation: in 1.2s cubic-bezier(.01,1.34,.77,1.56) forwards
+  animation: in 1.2s cubic-bezier(.01,1.34,.77,1.56) forwards
+
+*
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+  font-family: 'Lato', sans-serif
+
+body,html
+  width: 100%
+  height: 100vh
+
+body
+  background: #eeeeee
+  overflow-x: hidden
+  display: flex
+  justify-content: center
+  align-items: center
+
+  .container
+    max-width: 800px
+    position: relative
+    margin-top: auto
+    display: flex
+    flex-wrap: wrap
+    align-items: center
+    flex-direction: row
+    +animation
+
+    .item
+      width: 300px
+      height: 420px
+      margin: 20px
+      position: relative
+      flex: 1 0 auto
+      transition: all .4s ease-in-out
+      overflow: hidden
+
+      &::before,&::after
+        content: ''
+        position: absolute
+      &:before
+        width: 80%
+        height: 80%
+        border: 10px dashed rgba(white, .12)
+        top: 50%
+        left: 50%
+        +transform-translate(-50%, -50%)
+
+      &:hover
+        box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22)
+        transform: translateY(-20px)
+
+      .item-text
+        position: absolute
+        top: 50%
+        left: 50%
+        +item_Text(#fff,400,center)
+        +transform-translate(-50%,-50%)
+
+      .item-title
+        +item_Text(#fff,bold,center)
+        text-transform: uppercase
+        padding-top: 80px
+        position: relative
+
+        h3
+          border: 2px dashed #fff
+          padding: 5px
+          margin: 0 auto
+          width: 60%
+
+      .item-body-1
+        +itemBackground("../img/first.png")
+
+      .item-body-2
+        +itemBackground("../img/second.jpg")
+
+      .item-body-3
+        +itemBackground("../img/thrid.jpg")
+
+@keyframes in
+  from
+    +slideIn_Left(0.0, -100%)
+  to
+    +slideIn_Left(1.0, 0)
